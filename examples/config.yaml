@@ -1,0 +1,12 @@
+# define a name
+project_name: "navigation-robot"
+
+# define a version
+version: 0.0.1
+
+# define the packages names
+nodes:
+   - listener
+   - talker
+   - node1
+   - node2
