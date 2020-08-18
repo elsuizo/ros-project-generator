@@ -1,6 +1,6 @@
 [workspace]
 {% if nodes.len() == 1 %}
-members = ["{{nodes[0]}}"]
+members = ["src/{{nodes[0]}}"]
 {% else %}
-members = [{% for s in nodes %}{% if loop.index0 != nodes.len()-1%}"{{s}}",{% else %}"{{s}}"{% endif %}{% endfor %}]
+members = [{% for s in nodes %}{% if loop.index0 != nodes.len()-1%}"src/{{s}}",{% else %}"src/{{s}}"{% endif %}{% endfor %}]
 {% endif %}
