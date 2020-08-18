@@ -2,7 +2,7 @@
 
 ## Usage
 
-1. Generate a config `.yaml` file in the catkin workspace folder like this:
+1. Generate a config `config.yaml` file in the catkin workspace folder like this:
 
 ```yaml
 # define a name

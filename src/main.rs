@@ -80,5 +80,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut config_cargo = File::create(".cargo/config")?;
     write_file(&mut config_cargo, CONFIG_STRING)?;
 
+    println!("{:} project generated!!!", user_config.project_name);
+
     Ok(())
 }
