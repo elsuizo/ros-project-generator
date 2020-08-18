@@ -12,7 +12,7 @@ use std::path::Path;
 use std::io::Write;
 use std::fs::{read_to_string, create_dir_all, File};
 
-const CONFIG_STRING: &'static str = "[build]\ntarget-dir = build/cargo";
+const CONFIG_STRING: &'static str = "[build]\ntarget-dir = \"build/cargo\"";
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 struct Config {
@@ -31,6 +31,13 @@ struct WorkspaceTemplate {
 #[template(path = "CMakeLists.txt")]
 struct CMakeTemplate {
     node: String
+}
+
+#[derive(Template)]
+#[template(path = "package.txt")]
+struct PackageTemplate {
+    node: String,
+    version: String,
 }
 
 fn write_file(out: &mut dyn Write, content: &str) -> std::io::Result<()> {
@@ -69,9 +76,16 @@ fn main() -> Result<(), Box<dyn Error>> {
             .args(&["new", node.as_str()])
             .output()?;
 
+        // create the CMakeLists.txt file in the node
         let node_path = Path::new(node);
         let mut cmake_file = File::create(node_path.join("CMakeLists.txt"))?;
         write_file(&mut cmake_file, cmake_template.render()?.as_str())?;
+
+        // create the package.xml file in the node
+        let package_template = PackageTemplate {node: node.to_string(), version: user_config.version.clone()};
+        let mut package_file = File::create(node_path.join("package.xml"))?;
+        write_file(&mut package_file, package_template.render()?.as_str())?;
+
     }
 
     // create the .config dir and the config file
