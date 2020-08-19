@@ -1,6 +1,6 @@
 // TODO(elsuizo:2020-08-16): todos
 // [ ] maybe add the dependencies in the config.yaml
-// [ ] add the package.xml for all the nodes
+// [X] add the package.xml for all the nodes
 
 use askama::Template;
 use serde::{Serialize, Deserialize};
@@ -46,10 +46,9 @@ fn write_file(out: &mut dyn Write, content: &str) -> std::io::Result<()> {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    // TODO(elsuizo:2020-08-16): maybe the filename could read from command line
 
     let current_dir = env::current_dir()?;
-    let string_config = read_to_string("config.yaml")?;
+    let string_config = read_to_string("config.yaml").expect("you must have a configuration file config.yaml");
     let user_config: Config = serde_yaml::from_str(&string_config)?;
 
     // create the workspace Cargo.toml file filling the template

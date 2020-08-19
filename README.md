@@ -19,6 +19,14 @@ nodes:
    - node2
 ```
 
-2. Run the program with the catkin workspace path as command input
+2. Build the program
 
-`cargo run --release /home/user/path-to-catkin-workspace`
+`cargo build --release`
+
+3. Put the executable in your `PATH` variable
+
+One way is:
+
+`sudo ln -s /home/your_user/path_to_this_repo/ros-project-generator/target/release/ros-project-generator /usr/local/bin`
+
+4. Run the executable in the `catkin` workspace with the `config.yaml` file in it
