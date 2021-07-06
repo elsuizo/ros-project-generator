@@ -1,4 +1,4 @@
-# Project generator for the Rust client library
+# Cargo sub-command for generate ROS projects for the Rust client library
 
 ## Usage
 
@@ -23,10 +23,12 @@ nodes:
 
 `cargo build --release`
 
-3. Put the executable in your `PATH` variable
+3. Put the executable in your cargo installation
 
 One way is:
 
-`sudo ln -s /home/your_user/path_to_this_repo/ros-project-generator/target/release/ros-project-generator /usr/local/bin`
+`cp path-to-this-repo/target/release/cargo-ros-project-generator ~/.cargo/bin`
 
-4. Run the executable in the `catkin` workspace with the `config.yaml` file in it
+4. Run the executable like a cargo sub-command in the `catkin` workspace with the `config.yaml` file in it
+
+`cargo ros-project-generator`

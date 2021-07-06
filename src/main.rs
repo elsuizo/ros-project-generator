@@ -1,6 +1,7 @@
 // TODO(elsuizo:2020-08-16): todos
 // [ ] maybe add the dependencies in the config.yaml
 // [X] add the package.xml for all the nodes
+// [X] add the basic dependencies in all nodes
 
 use askama::Template;
 use serde::{Serialize, Deserialize};
@@ -9,6 +10,7 @@ use std::process::Command;
 use std::env;
 use std::error::Error;
 use std::path::Path;
+use std::fs::OpenOptions;
 use std::io::Write;
 use std::fs::{read_to_string, create_dir_all, File};
 
@@ -74,7 +76,14 @@ fn main() -> Result<(), Box<dyn Error>> {
         let node_path = Path::new(node);
         let mut cmake_file = File::create(node_path.join("CMakeLists.txt"))?;
         write_file(&mut cmake_file, cmake_template.render()?.as_str())?;
+        // add the basics dependencies to the node
+        let mut cargo_file = OpenOptions::new()
+                .write(true)
+                .append(true)
+                .open(node_path.join("Cargo.toml")).expect("missing Cargo.toml file");
 
+        writeln!(cargo_file, "rosrust = \"0.9.6\"")?;
+        writeln!(cargo_file, "rosrust_msg = \"0.1.2\"")?;
         // // create the package.xml file in the node
         let package_template = PackageTemplate {node: node.to_string(), version: user_config.version.clone()};
         let mut package_file = File::create(node_path.join("package.xml"))?;
