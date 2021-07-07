@@ -84,7 +84,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         writeln!(cargo_file, "rosrust = \"0.9.6\"")?;
         writeln!(cargo_file, "rosrust_msg = \"0.1.2\"")?;
-        // // create the package.xml file in the node
+        writeln!(cargo_file, "env_logger = \"0.8.4\"")?;
+        // create the package.xml file in the node
         let package_template = PackageTemplate {node: node.to_string(), version: user_config.version.clone()};
         let mut package_file = File::create(node_path.join("package.xml"))?;
         write_file(&mut package_file, package_template.render()?.as_str())?;
