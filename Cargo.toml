@@ -1,9 +1,14 @@
 [package]
 name = "ros-project-generator"
-version = "0.1.0"
+version = "0.1.3"
 authors = ["elsuizo <mnoblia@disroot.org>"]
 edition = "2018"
-
+description = "cargo subcommand for generate ROS projects to the rosrust client library"
+repository = "https://github.com/elsuizo/ros-project-generator"
+documentation = "https://github.com/elsuizo/ros-project-generator/README.md"
+license = "MIT"
+keywords = ["ros",  "subcommand", "robotics"]
+categories = ["development-tools::cargo-plugins"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [[bin]]
 name = "cargo-ros-project-generator"
