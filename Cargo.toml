@@ -1,6 +1,6 @@
 [package]
 name = "ros-project-generator"
-version = "0.1.4"
+version = "0.1.5"
 authors = ["elsuizo <mnoblia@disroot.org>"]
 edition = "2018"
 description = "cargo subcommand for generate ROS projects of the rosrust client library"

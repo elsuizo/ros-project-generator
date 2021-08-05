@@ -14,7 +14,7 @@ use std::fs::OpenOptions;
 use std::io::Write;
 use std::fs::{read_to_string, create_dir_all, File};
 
-const CONFIG_STRING: &'static str = "[build]\ntarget-dir = \"build/cargo\"";
+const CONFIG_STRING: &str = "[build]\ntarget-dir = \"build/cargo\"";
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 struct Config {
@@ -82,9 +82,9 @@ fn main() -> Result<(), Box<dyn Error>> {
                 .append(true)
                 .open(node_path.join("Cargo.toml")).expect("missing Cargo.toml file");
 
-        writeln!(cargo_file, "rosrust = \"0.9.6\"")?;
-        writeln!(cargo_file, "rosrust_msg = \"0.1.2\"")?;
-        writeln!(cargo_file, "env_logger = \"0.8.4\"")?;
+        writeln!(cargo_file, "rosrust = \"0.9.7\"")?;
+        writeln!(cargo_file, "rosrust_msg = \"0.1.3\"")?;
+        writeln!(cargo_file, "env_logger = \"0.9.0\"")?;
         // create the package.xml file in the node
         let package_template = PackageTemplate {node: node.to_string(), version: user_config.version.clone()};
         let mut package_file = File::create(node_path.join("package.xml"))?;
